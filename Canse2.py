@@ -10,7 +10,7 @@ import psycopg2
 
 DatArray = getData()
 
-conn = psycopg2.connect("host=localhost dbname=postgres user=postgres port=5432 password=stinkypoo")
+conn = psycopg2.connect("host=localhost dbname=postgres user=postgres port=5432 password=")
 cur = conn.cursor()
 cur.execute("select relname from pg_class where relkind = 'r' and relname !~ '^(pg_|sql_)' ;")
 print cur.fetchall()
