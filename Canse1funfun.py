@@ -14,6 +14,8 @@ def getData():
 	RegExList.append('gender preferred_name.+>(.+)<')
 	NameList.append('Year Diagnosed')
 	RegExList.append('year_of_initial_pathologic_diagnosis.+>(.+)<')
+	NameList.append('Age Diagnosed')
+	RegExList.append('age_at_initial_pathologic_diagnosis.+>(.+)<')
 	NameList.append('Blast Percent')
 	RegExList.append('lab_procedure_blast_cell_outcome_percentage_value.+>(.+)<')
 	NameList.append('Bone Marrow Blast Percent')
@@ -42,9 +44,24 @@ def getData():
 	RegExList.append('lab_procedure_bone_marrow_promonocyte_count_result_percent_value.+>(.+)<')
 	NameList.append('Abnormal Lymphocyte Percent')
 	RegExList.append('lab_procedure_abnormal_lymphocyte_result_percent_value.+>(.+)<')
+	NameList.append('PML-RAR')
+	RegExList.append('molecular_analysis_abnormality_testing_result.+>(PML-RAR.+)<')
+	NameList.append('FLT3')
+	RegExList.append('molecular_analysis_abnormality_testing_result.+>(FLT3.+)<')
+	NameList.append('IDH1 R132')
+	RegExList.append('molecular_analysis_abnormality_testing_result.+>(IDH1 R132.+)<')
+	NameList.append('IDH1 R140')
+	RegExList.append('molecular_analysis_abnormality_testing_result.+>(IDH1 R140.+)<')
+	NameList.append('IDH1 R172')
+	RegExList.append('molecular_analysis_abnormality_testing_result.+>(IDH1 R172.+)<')
+	NameList.append('Activating RAS')
+	RegExList.append('molecular_analysis_abnormality_testing_result.+>(Activating RAS.+)<')
+	NameList.append('NPMc')
+	RegExList.append('molecular_analysis_abnormality_testing_result.+>(NPMc.+)<')
+	NameList.append('Risk Category')
+	RegExList.append('acute_myeloid_leukemia_calgb_cytogenetics_risk_category.+>(.+)<')
 	NameList.append('Days To Death')
 	RegExList.append('days_to_death.+>(.+)<')
-
 
 	path = 'D:\Anaconda\Project Canse\Data\Clinical\XML'
 	FileNames = os.listdir(path)
@@ -57,6 +74,18 @@ def getData():
 			for j in range(len(RegExList)):
 				if re.search(RegExList[j],lines):
 					g = re.findall(RegExList[j],lines)
+					#print g[0],type(g[0])
+					b = g[0]
+					if re.search('egative',b):
+						g[0]=0
+					if re.search('ositive',b):
+						g[0]=1
+					if re.search('Intermediate/Normal',b):
+						g[0]=1
+					if re.search('Favorable',b):
+						g[0]=0
+					if re.search('Poor',b):
+						g[0]=2
 					DatArray[j][i] = g[0]
 	return [DatArray, NameList]
 
@@ -86,9 +115,4 @@ def listClean(list1,remitem1,list2,remitem2):
 NameList = []
 RegExList = []
 
-NameList.append('Risk Category')
-RegExList.append('acute_myeloid_leukemia_calgb_cytogenetics_risk_category.+>(.+)<')
-NameList.append('FLT3')
-RegExList.append('molecular_analysis_abnormality_testing_result.+>(FLT3.+)<')
-NameList.append('FLT3')
-RegExList.append('molecular_analysis_abnormality_testing_result.+>(FLT3.+)<')
+
