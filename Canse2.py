@@ -14,10 +14,17 @@ DatArray = DatArray[0][0:2]
 #print DatArray
 #a = raw_input('Blah...')
 
-#conn = psycopg2.connect("host=localhost dbname=postgres user=postgres port=5433 password=stinkypoo")
+<<<<<<< HEAD
+#conn = psycopg2.connect("host=localhost dbname=postgres user=postgres port=5433 password=")
 #cur = conn.cursor()
 #cur.execute("select relname from pg_class where relkind = 'r' and relname !~ '^(pg_|sql_)' ;")
 #print cur.fetchall()
+=======
+conn = psycopg2.connect("host=localhost dbname=postgres user=postgres port=5432 password=")
+cur = conn.cursor()
+cur.execute("select relname from pg_class where relkind = 'r' and relname !~ '^(pg_|sql_)' ;")
+print cur.fetchall()
+>>>>>>> 44b633a8fe130871da75ce82f1b59222cfcda17a
 
 #cur.execute("DROP TABLE cancer_data")
 
